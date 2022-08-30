@@ -1,0 +1,121 @@
+[
+  {
+    "line": 6,
+    "elements": [
+      {
+        "start_timestamp": "2022-08-30T23:40:55.963Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.before(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 55,
+        "name": "Validar a criacao de uma simulacao de credito",
+        "description": "",
+        "id": "validar-requisições-para-simulação-de-credito-sicredi-verificando-situação-de-restrição-de-cpf-e;validar-a-criacao-de-uma-simulacao-de-credito",
+        "after": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.after()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Cenario",
+        "steps": [
+          {
+            "output": [
+              "http://localhost:8080/api/v1/simulacoes/"
+            ],
+            "result": {
+              "duration": 32493700,
+              "status": "passed"
+            },
+            "line": 56,
+            "name": "que possuo acesso a API de Simulacoes para criar uma simulacao",
+            "match": {
+              "location": "steps.SimulacaoStep.quePossuoAcessoAAPIDeSimulacoesParaCriarUmaSimulacao()"
+            },
+            "keyword": "Dado "
+          },
+          {
+            "output": [
+              "*************Dados Enviados no Request*************",
+              "POST http://localhost:8080/api/v1/simulacoes/",
+              "Body: \n{\"parcelas\":3,\"seguro\":true,\"cpf\":\"40547380888\",\"valor\":1200,\"nome\":\"Rosette Hilpert\",\"email\":\"katie.thiel@yahoo.com\"}",
+              "Headers: {Accept\u003dapplication/json, Content-Type\u003dapplication/json}",
+              "*******Dados Recebidos*******",
+              "Status Code 201",
+              "Payload recebido: \n{\n    \"id\": 26,\n    \"nome\": \"Rosette Hilpert\",\n    \"cpf\": \"40547380888\",\n    \"email\": \"katie.thiel@yahoo.com\",\n    \"valor\": 1200,\n    \"parcelas\": 3,\n    \"seguro\": true\n}",
+              "Tempo de resposta: 561000"
+            ],
+            "result": {
+              "duration": 2217425200,
+              "status": "passed"
+            },
+            "line": 57,
+            "name": "envio um resquest para criacao de uma simulacao",
+            "match": {
+              "location": "steps.SimulacaoStep.envioUmResquestParaCriacaoDeUmaSimulacao()"
+            },
+            "keyword": "Quando "
+          },
+          {
+            "output": [
+              "CPF Cadastrado: 40547380888"
+            ],
+            "result": {
+              "duration": 613065300,
+              "status": "passed"
+            },
+            "line": 58,
+            "name": "retorna a simulação com os dados cadastrados",
+            "match": {
+              "location": "steps.SimulacaoStep.retornaASimulaçãoComOsDadosCadastrados()"
+            },
+            "keyword": "Então "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 59,
+            "name": "o status code deve ser 201",
+            "match": {
+              "arguments": [
+                {
+                  "val": "201",
+                  "offset": 23
+                }
+              ],
+              "location": "steps.RestricaoStep.oStatusCodeDeveSer(int)"
+            },
+            "keyword": "E "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@criar-simulacao"
+          },
+          {
+            "name": "@ok"
+          }
+        ]
+      }
+    ],
+    "name": "Validar requisições para Simulação de Credito Sicredi verificando situação de restrição de CPF e",
+    "description": "  criação de simulações de emprestimos para solicitação de pedidos de credito",
+    "id": "validar-requisições-para-simulação-de-credito-sicredi-verificando-situação-de-restrição-de-cpf-e",
+    "keyword": "Funcionalidade",
+    "uri": "file:src/test/resources/Features/SicrediApi.feature",
+    "tags": []
+  }
+]
