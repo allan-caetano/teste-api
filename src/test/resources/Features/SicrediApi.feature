@@ -3,6 +3,7 @@
 # Version: 1.0
 # encoding: UTF-8
 
+@regressivo
 Funcionalidade: Validar requisições para Simulação de Credito Sicredi verificando situação de restrição de CPF e
   criação de simulações de emprestimos para solicitação de pedidos de credito
 
@@ -13,7 +14,7 @@ Funcionalidade: Validar requisições para Simulação de Credito Sicredi verifi
     Então devo receber a mensagem informando situacao do CPF "58063164083"
     E o status code deve ser 200
 
-  @lista-cpf-com-restricao
+  @lista-cpf-com-restricao  @ok
   Esquema do Cenario: Simulador possui uma restrição
     Dado que possuo acesso a API de restricoes
     Quando eu efetuar uma solicitação para "<CPF restriçao>" recurso de restricoes
@@ -44,19 +45,20 @@ Funcionalidade: Validar requisições para Simulação de Credito Sicredi verifi
     Então devo receber uma lista de simulacoes cadastradas
     E o status code deve ser 200
 
-  @consulta-simulacao-cpf @melhorar
-  Cenario: Validar a Consulta deum Simulacoes para API de Simulacao por CPF
-    Dado que possuo acesso a API de Simulacoes
-    Quando envio um resquest para API simulacoes com CPF "78040447046"
-    Então retorna a simulação cadastrada
-    E o status code deve ser 200
-
   @criar-simulacao  @ok
   Cenario: Validar a criacao de uma simulacao de credito
     Dado que possuo acesso a API de Simulacoes para criar uma simulacao
     Quando envio um resquest para criacao de uma simulacao
     Então retorna a simulação com os dados cadastrados
     E o status code deve ser 201
+
+    #cpf está a dinâmico recuperando de cucumber.properties
+  @consulta-simulacao-cpf  @ok
+  Cenario: Validar a Consulta a uma Simulacao para API de Simulacao por CPF
+    Dado que possuo acesso a API de Simulacoes
+    Quando envio um resquest para API simulacoes com CPF "77167006974"
+    Então retorna a simulação feita para o CPF "77167006974"
+    E o status code deve ser 200
 
   @criar-simulacao-error  @ok
   Cenario: Validar a resposta de mensagem de erro

@@ -1,9 +1,9 @@
 [
   {
-    "line": 6,
+    "line": 7,
     "elements": [
       {
-        "start_timestamp": "2022-08-30T23:40:55.963Z",
+        "start_timestamp": "2022-08-31T12:53:20.981Z",
         "before": [
           {
             "result": {
@@ -14,7 +14,7 @@
             }
           }
         ],
-        "line": 55,
+        "line": 49,
         "name": "Validar a criacao de uma simulacao de credito",
         "description": "",
         "id": "validar-requisições-para-simulação-de-credito-sicredi-verificando-situação-de-restrição-de-cpf-e;validar-a-criacao-de-uma-simulacao-de-credito",
@@ -36,10 +36,10 @@
               "http://localhost:8080/api/v1/simulacoes/"
             ],
             "result": {
-              "duration": 32493700,
+              "duration": 23941500,
               "status": "passed"
             },
-            "line": 56,
+            "line": 50,
             "name": "que possuo acesso a API de Simulacoes para criar uma simulacao",
             "match": {
               "location": "steps.SimulacaoStep.quePossuoAcessoAAPIDeSimulacoesParaCriarUmaSimulacao()"
@@ -50,18 +50,18 @@
             "output": [
               "*************Dados Enviados no Request*************",
               "POST http://localhost:8080/api/v1/simulacoes/",
-              "Body: \n{\"parcelas\":3,\"seguro\":true,\"cpf\":\"40547380888\",\"valor\":1200,\"nome\":\"Rosette Hilpert\",\"email\":\"katie.thiel@yahoo.com\"}",
+              "Body: \n{\"parcelas\":3,\"seguro\":true,\"cpf\":\"48208378685\",\"valor\":1200,\"nome\":\"Kimberli Hudson\",\"email\":\"maria.dietrich@gmail.com\"}",
               "Headers: {Accept\u003dapplication/json, Content-Type\u003dapplication/json}",
               "*******Dados Recebidos*******",
               "Status Code 201",
-              "Payload recebido: \n{\n    \"id\": 26,\n    \"nome\": \"Rosette Hilpert\",\n    \"cpf\": \"40547380888\",\n    \"email\": \"katie.thiel@yahoo.com\",\n    \"valor\": 1200,\n    \"parcelas\": 3,\n    \"seguro\": true\n}",
-              "Tempo de resposta: 561000"
+              "Payload recebido: \n{\n    \"id\": 31,\n    \"nome\": \"Kimberli Hudson\",\n    \"cpf\": \"48208378685\",\n    \"email\": \"maria.dietrich@gmail.com\",\n    \"valor\": 1200,\n    \"parcelas\": 3,\n    \"seguro\": true\n}",
+              "Tempo de resposta: 332000"
             ],
             "result": {
-              "duration": 2217425200,
+              "duration": 1306064300,
               "status": "passed"
             },
-            "line": 57,
+            "line": 51,
             "name": "envio um resquest para criacao de uma simulacao",
             "match": {
               "location": "steps.SimulacaoStep.envioUmResquestParaCriacaoDeUmaSimulacao()"
@@ -70,13 +70,13 @@
           },
           {
             "output": [
-              "CPF Cadastrado: 40547380888"
+              "CPF Cadastrado: 48208378685"
             ],
             "result": {
-              "duration": 613065300,
+              "duration": 399521300,
               "status": "passed"
             },
-            "line": 58,
+            "line": 52,
             "name": "retorna a simulação com os dados cadastrados",
             "match": {
               "location": "steps.SimulacaoStep.retornaASimulaçãoComOsDadosCadastrados()"
@@ -85,9 +85,10 @@
           },
           {
             "result": {
+              "duration": 495200,
               "status": "passed"
             },
-            "line": 59,
+            "line": 53,
             "name": "o status code deve ser 201",
             "match": {
               "arguments": [
@@ -103,6 +104,9 @@
         ],
         "tags": [
           {
+            "name": "@regressivo"
+          },
+          {
             "name": "@criar-simulacao"
           },
           {
@@ -116,6 +120,15 @@
     "id": "validar-requisições-para-simulação-de-credito-sicredi-verificando-situação-de-restrição-de-cpf-e",
     "keyword": "Funcionalidade",
     "uri": "file:src/test/resources/Features/SicrediApi.feature",
-    "tags": []
+    "tags": [
+      {
+        "name": "@regressivo",
+        "type": "Tag",
+        "location": {
+          "line": 6,
+          "column": 1
+        }
+      }
+    ]
   }
 ]

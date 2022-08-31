@@ -15,11 +15,14 @@ import user.UsersLombok;
 import utils.JsonUtils;
 import utils.PropertiesUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimulacaoStep extends ApiRequests {
+
+    private PropertiesUtils propertiesUtils = new PropertiesUtils();
 
     PropertiesUtils prop = new PropertiesUtils();
     JsonUtils jsonUtils = new JsonUtils();
@@ -47,15 +50,16 @@ public class SimulacaoStep extends ApiRequests {
     }
 
     @Quando("envio um resquest para API simulacoes com CPF {string}")
-    public void envioUmResquestParaAPISimulacoesComCPF(String cpf) {
-        super.url = prop.getProp("url_simulacao_sicredi") + cpf;
+    public void envioUmResquestParaAPISimulacoesComCPF(String cpf) throws IOException {
+        super.url = prop.getProp("url_simulacao_sicredi") + propertiesUtils.obterNumero();
         super.headers = apiHeaders.headers();
         super.GET();
+        logInfo(propertiesUtils.obterNumero());
     }
 
-    @Então("retorna a simulação cadastrada")
-    public void retornaASimulaçãoCadastrada() {
-        assertEquals("78040447046", response.jsonPath().getString("cpf"),
+    @Então("retorna a simulação feita para o CPF {string}")
+    public void retornaASimulaçãoFeitaParaOCPF(String cpf) throws IOException {
+        assertEquals(propertiesUtils.obterNumero(), response.jsonPath().getString("cpf"),
                 "Erro na comparação do Objeto.");
     }
 
@@ -86,7 +90,7 @@ public class SimulacaoStep extends ApiRequests {
         Assert.assertEquals(userEnvio.getCpf(), response.jsonPath().get("cpf"));
         Assert.assertEquals(userEnvio.getNome(), response.jsonPath().get("nome"));
         logInfo("CPF Cadastrado: " + response.jsonPath().get("cpf"));
-
+        propertiesUtils.guardarCPFGerado(response.jsonPath().get("cpf"));
     }
 
     @Então("retorna a simulação com os a mensagem de erro")
@@ -183,4 +187,6 @@ public class SimulacaoStep extends ApiRequests {
         super.headers = apiHeaders.headers();
         super.GET();
     }
+
+
 }
