@@ -52,7 +52,8 @@ Funcionalidade: Validar requisições para Simulação de Credito Sicredi verifi
     Então retorna a simulação com os dados cadastrados
     E o status code deve ser 201
 
-  @consulta-simulacao-cpf  @ok @deixar-dinamico
+    #cpf está a dinâmico recuperando de cucumber.properties
+  @consulta-simulacao-cpf  @ok
   Cenario: Validar a Consulta a uma Simulacao para API de Simulacao por CPF
     Dado que possuo acesso a API de Simulacoes
     Quando envio um resquest para API simulacoes com CPF "77167006974"

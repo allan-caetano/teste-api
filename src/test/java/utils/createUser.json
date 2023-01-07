@@ -1,8 +1,9 @@
-{
-  "nome": "Mais um Fulano de Tal",
-  "cpf": 58063164083,
-  "email": "email@email.com",
-  "valor": 1200,
-  "parcelas": 3,
-  "seguro": true
-}
+
+  {
+    "nome": "Mais um Fulano de Tal",
+    "cpf": 58063164083,
+    "email": "email@email123.com",
+    "valor": 1200,
+    "parcelas": 3,
+    "seguro": true
+  }

@@ -3,7 +3,6 @@ package api;
 import org.json.JSONObject;
 import io.restassured.response.Response;
 import utils.LogUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

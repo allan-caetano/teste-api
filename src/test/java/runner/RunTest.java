@@ -21,6 +21,6 @@ public class RunTest {
 
     @AfterClass
     public static void report() throws IOException {
-        Runtime.getRuntime().exec("cmd.exe /c mvn cluecumber-report:reporting");
+        Runtime.getRuntime().exec("cmd.exe /c mvn cucumber-report:reporting");
     }
 }
