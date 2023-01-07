@@ -4,7 +4,7 @@
 # encoding: UTF-8
 
 @regressivo
-Funcionalidade: Validar requisições para Simulação de Credito Sicredi verificando situação de restrição de CPF e
+Funcionalidade: Validar requisições para Simulação de Credito  verificando situação de restrição de CPF e
   criação de simulações de emprestimos para solicitação de pedidos de credito
 
   @cpf-com-restricao  @ok

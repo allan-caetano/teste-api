@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import org.json.JSONObject;
 import org.json.XML;
-
 @Data
 @Builder
-public class UsersLombok {
+public class Users {
 
         private String nome;
         private String cpf;

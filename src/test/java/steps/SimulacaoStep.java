@@ -7,39 +7,37 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.cucumber.messages.internal.com.google.gson.Gson;
-import org.hamcrest.Matchers;
 import org.json.JSONObject;
 
 import org.junit.Assert;
-import user.UsersLombok;
+import user.Users;
 import utils.JsonUtils;
 import utils.PropertiesUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimulacaoStep extends ApiRequests {
 
-    private PropertiesUtils propertiesUtils = new PropertiesUtils();
+    private final PropertiesUtils propertiesUtils = new PropertiesUtils();
 
     PropertiesUtils prop = new PropertiesUtils();
     JsonUtils jsonUtils = new JsonUtils();
     ApiHeaders apiHeaders = new ApiHeaders();
     Faker faker = new Faker();
-    UsersLombok userEnvio;
+    Users userEnvio;
 
     @Dado("que possuo acesso a API de Simulacoes")
     public void quePossuoAcessoAAPIDeSimulacoes() {
-        String uri = prop.getProp("url_simulacao_sicredi");
+        String uri = prop.getProp("url_simulacao");
         logInfo(uri);
     }
 
     @Quando("envio um resquest para o recurso correto")
     public void envioUmResquestParaORecursoCorreto() {
-        super.url = prop.getProp("url_simulacao_sicredi");
-        super.headers = apiHeaders.headers();
+        url = prop.getProp("url_simulacao");
+        headers = apiHeaders.headers();
         super.GET();
     }
 
@@ -51,7 +49,7 @@ public class SimulacaoStep extends ApiRequests {
 
     @Quando("envio um resquest para API simulacoes com CPF {string}")
     public void envioUmResquestParaAPISimulacoesComCPF(String cpf) throws IOException {
-        super.url = prop.getProp("url_simulacao_sicredi") + propertiesUtils.obterNumero();
+        super.url = prop.getProp("url_simulacao") + propertiesUtils.obterNumero();
         super.headers = apiHeaders.headers();
         super.GET();
         logInfo(propertiesUtils.obterNumero());
@@ -65,22 +63,24 @@ public class SimulacaoStep extends ApiRequests {
 
     @Dado("que possuo acesso a API de Simulacoes para criar uma simulacao")
     public void quePossuoAcessoAAPIDeSimulacoesParaCriarUmaSimulacao() {
-        String uri = prop.getProp("url_simulacao_sicredi");
+        String uri = prop.getProp("url_simulacao");
         logInfo(uri);
     }
 
     @Quando("envio um resquest para criacao de uma simulacao")
-    public void envioUmResquestParaCriacaoDeUmaSimulacao() {
-        super.url = prop.getProp("url_simulacao_sicredi");
+    public void envioUmResquestParaCriacaoDeUmaSimulacao() throws IOException {
+        super.url = prop.getProp("url_simulacao");
         super.headers = apiHeaders.headers();
-        userEnvio = UsersLombok.builder()
+        userEnvio = Users.builder()
                 .nome(faker.name().fullName())
                 .cpf(faker.number().digits(11))
-                .email(faker.internet().emailAddress())
+                .email(jsonUtils.parseJSONFile().getString("email"))
+               // .email(faker.internet().emailAddress())
                 .valor(1200.00)
                 .parcelas(3)
                 .seguro(true)
                 .build();
+
         super.body = new JSONObject((new Gson().toJson(userEnvio)));
         super.POST();
     }
@@ -101,16 +101,15 @@ public class SimulacaoStep extends ApiRequests {
 
     @Dado("que possuo acesso a API de Simulacoes para alterar uma simulacao existente")
     public void quePossuoAcessoAAPIDeSimulacoesParaAlterarUmaSimulacaoExistente() {
-        super.url = prop.getProp("url_simulacao_sicredi");
+        super.url = prop.getProp("url_simulacao");
         logInfo(url);
-
     }
 
     @Quando("envio um resquest para alteracao de uma simulacao passando CPF {string} existente")
     public void envioUmResquestParaAlteracaoDeUmaSimulacaoPassandoCPFExistente(String cpf) {
-        super.url = prop.getProp("url_simulacao_sicredi") + cpf;
+        super.url = prop.getProp("url_simulacao") + cpf;
         super.headers = apiHeaders.headers();
-        userEnvio = UsersLombok.builder()
+        userEnvio = Users.builder()
                 .nome(faker.name().fullName())
                 .cpf("66414919004")
                 .email("xpto-auto@email.com")
@@ -131,13 +130,13 @@ public class SimulacaoStep extends ApiRequests {
 
     @Dado("que possuo acesso a API de Simulacoes para deletar uma simulacao existente")
     public void quePossuoAcessoAAPIDeSimulacoesParaDeletarUmaSimulacaoExistente() {
-        super.url = prop.getProp("url_simulacao_sicredi");
+        super.url = prop.getProp("url_simulacao");
         logInfo(url);
     }
 
     @Quando("envio um resquest para deletar uma simulacao passando CPF {string} existente")
     public void envioUmResquestParaDeletarUmaSimulacaoPassandoCPFExistente(String cpf) {
-        super.url = prop.getProp("url_simulacao_sicredi") + cpf;
+        super.url = prop.getProp("url_simulacao") + cpf;
         super.headers = apiHeaders.headers();
         super.body = new JSONObject();
         super.DELETE();
@@ -145,9 +144,9 @@ public class SimulacaoStep extends ApiRequests {
 
     @Quando("envio um resquest para criacao de uma simulacao sem o CPF")
     public void envioUmResquestParaCriacaoDeUmaSimulacaoSemOCPF() {
-        super.url = prop.getProp("url_simulacao_sicredi");
+        super.url = prop.getProp("url_simulacao");
         super.headers = apiHeaders.headers();
-        userEnvio = UsersLombok.builder()
+        userEnvio = Users.builder()
                 .nome(faker.name().fullName())
                 .email(faker.internet().emailAddress())
                 .valor(1200.00)
@@ -160,9 +159,9 @@ public class SimulacaoStep extends ApiRequests {
 
     @Quando("envio um resquest para criacao de uma simulacao com CPF {string}")
     public void envioUmResquestParaCriacaoDeUmaSimulacaoComCPF(String cpf) {
-        super.url = prop.getProp("url_simulacao_sicredi");
+        super.url = prop.getProp("url_simulacao");
         super.headers = apiHeaders.headers();
-        userEnvio = UsersLombok.builder()
+        userEnvio = Users.builder()
                 .nome(faker.name().fullName())
                 .email(faker.internet().emailAddress())
                 .cpf(cpf)
@@ -170,7 +169,7 @@ public class SimulacaoStep extends ApiRequests {
                 .parcelas(3)
                 .seguro(true)
                 .build();
-        super.body = new JSONObject((new Gson().toJson(userEnvio)));
+        super.body = new JSONObject();
         super.POST();
     }
 
@@ -182,11 +181,9 @@ public class SimulacaoStep extends ApiRequests {
 
     @Quando("eu efetuar uma solicitação para {string} recurso de restricoes")
     public void euEfetuarUmaSolicitaçãoParaRecursoDeRestricoes(String cpfRestricao) {
-        super.url = prop.getProp("url_resticoes_sicredi") + cpfRestricao;
+        super.url = prop.getProp("url_resticoes") + cpfRestricao;
         logInfo(url);
         super.headers = apiHeaders.headers();
         super.GET();
     }
-
-
 }
