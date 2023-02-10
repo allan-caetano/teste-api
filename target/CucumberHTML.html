@@ -27,6 +27,7 @@
                 <li class="tab col s3"><a class=" green lighten-3 active blue-text waves-effect waves-light tooltipped" data-tooltip="Results Overview" href="#overview"><i class="material-icons">assessment</i> Overview</a></li>
                 <li class="tab col s3"><a class=" green lighten-3 white-text waves-effect waves-light tooltipped" data-tooltip="Scenarios by Features" href="#features"><i class="material-icons">view_headline</i> Features</a></li>
                 <li class="tab col s3"><a class=" green lighten-3 white-text waves-effect waves-light tooltipped" data-tooltip="Scenarios Summary Table" href="#summary"><i class="material-icons">view_comfy</i> Summary</a></li>
+                    <li class="tab col s3"><a class=" green lighten-3 white-text waves-effect waves-light tooltipped" data-tooltip="Failed Scenarios" href="#errors"><i class="material-icons">bug_report</i> Errors</a></li>
             </ul>
         </div>
     </div>
@@ -51,7 +52,7 @@
         <div class="col m4 s12">
             <table id="metaData" class="bordered">
                 <tbody>
-                <tr><th>Duration</th><td>2S</td></tr>
+                <tr><th>Duration</th><td>5S</td></tr>
                 <tr><th>Environment</th><td>My Environment</td></tr>
                 </tbody>
             </table>
@@ -60,17 +61,17 @@
 </div>
 <div id="features" class="col s12 green lighten-5">
     <ul class="featureList collapsible popout" data-collapsible="expandable">
-        <li class="feature working">
+        <li class="feature broken">
             <div class="collapsible-header green lighten-1 white-text waves-effect waves-light">
                 <i class="material-icons white-text">featured_play_list</i>
-                <b>Funcionalidade</b>&nbsp;Validar requisições para Simulação de Credito Sicredi verificando situação de restrição de CPF e (2S)
+                <b>Funcionalidade</b>&nbsp;Validar requisições para Simulação de Credito  verificando situação de restrição de CPF e (5S)
             </div>
             <div class="collapsible-body green lighten-4">
                         <div class="chip"><i class="material-icons rotate-45">label</i>@regressivo</div>
                 <ul class="collection scenarioList">
-                        <li class="collection-item scenario passed">
+                        <li class="collection-item scenario failed">
                             <a class="waves-effect waves-light modal-trigger white-text" href="#f0s0">
-                                <b>Cenario</b> Validar a criacao de uma simulacao de credito (2S)
+                                <b>Cenario</b> Validar uma Consulta a um CPF com restricao (5S)
                             </a>
                         </li>
                 </ul>
@@ -89,17 +90,31 @@
         </tr>
         </thead>
         <tbody>
-                    <tr class="passed">
-                        <td class="hoverable">Validar requisições para Simulação de Credito Sicredi verificando situação de restrição de CPF e</td>
-                        <td class="hoverable"><a class="modal-trigger white-text" href="#f0s0">Validar a criacao de uma simulacao de credito</a></td>
-                        <td class="hoverable uppercase">passed</td>
-                        <td class="hoverable hide-on-small-only"></td>
+                    <tr class="failed">
+                        <td class="hoverable">Validar requisições para Simulação de Credito  verificando situação de restrição de CPF e</td>
+                        <td class="hoverable"><a class="modal-trigger white-text" href="#f0s0">Validar uma Consulta a um CPF com restricao</a></td>
+                        <td class="hoverable uppercase">failed</td>
+                        <td class="hoverable hide-on-small-only">java.net.ConnectException: Connection refused: connect</td>
                     </tr>
         </tbody>
     </table>
 </div>
 <div id="errors" class="col s12 green lighten-5">
     <ul class="errorList collapsible popout" data-collapsible="expandable">
+        <li class="error">
+            <div class="collapsible-header red lighten-2 white-text waves-effect waves-light">
+                <i class="material-icons">bug_report</i>java.net.ConnectException: Connection refused: connect
+            </div>
+            <div class="collapsible-body green lighten-4">
+                <ul class="collection failedScenarioList">
+                                    <li class="collection-item failedScenario green lighten-5">
+                                        <i class="material-icons red-text">highlight_off</i>&nbsp;<a
+                                            class="modal-trigger red-text"
+                                            href="#f0s0">Validar uma Consulta a um CPF com restricao</a>
+                                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </div>
     </div>
@@ -116,49 +131,142 @@
 <div id="f0s0" class="modal modal-fixed-footer">
     <div class="modal-content">
                 <div class="chip"><i class="material-icons rotate-45">label</i>@regressivo</div>
-                <div class="chip"><i class="material-icons rotate-45">label</i>@criar-simulacao</div>
+                <div class="chip"><i class="material-icons rotate-45">label</i>@cpf-com-restricao</div>
                 <div class="chip"><i class="material-icons rotate-45">label</i>@ok</div>
 
-        <h5>Validar a criacao de uma simulacao de credito</h5>
-        file:src/test/resources/Features/SicrediApi.feature:49
+        <h5>Validar uma Consulta a um CPF com restricao</h5>
+        file:src/test/resources/Features/SicrediApi.feature:11
 
         <p><ul class="collection stepList">
 <li class="collection-item hook"></li>
 
 <li class="collection-item step passed">
-    <b>Dado </b> que possuo acesso a API de Simulacoes para criar uma simulacao (0S)
-            <br>http://localhost:8080/api/v1/simulacoes/
+    <b>Dado </b> que possuo acesso a API de restricoes (0S)
+            <br>Aqui chegou
 </li>
 
-<li class="collection-item step passed">
-    <b>Quando </b> envio um resquest para criacao de uma simulacao (1S)
-            <br>*************Dados Enviados no Request*************
-            <br>POST http://localhost:8080/api/v1/simulacoes/
-            <br>Body: 
-{"parcelas":3,"seguro":true,"cpf":"78230363251","valor":1200,"nome":"Mr. Isreal Bogisich","email":"email@email123.com"}
-            <br>Headers: {Accept=application/json, Content-Type=application/json}
-            <br>*******Dados Recebidos*******
-            <br>Status Code 201
-            <br>Payload recebido: 
-{
-    "id": 14,
-    "nome": "Mr. Isreal Bogisich",
-    "cpf": "78230363251",
-    "email": "email@email123.com",
-    "valor": 1200,
-    "parcelas": 3,
-    "seguro": true
-}
-            <br>Tempo de resposta: 427000
+<li class="collection-item step failed">
+    <b>Quando </b> envio um resquest de um CPF "58063164083" com dados validos (4S)
+        <pre class="error">java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:326)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:610)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:445)
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56)
+	at org.apache.http.client.HttpClient$execute$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:148)
+	at io.restassured.internal.RequestSpecificationImpl$RestAssuredHttpBuilder.doRequest(RequestSpecificationImpl.groovy:2055)
+	at io.restassured.internal.http.HTTPBuilder.doRequest(HTTPBuilder.java:495)
+	at io.restassured.internal.http.HTTPBuilder.request(HTTPBuilder.java:452)
+	at io.restassured.internal.http.HTTPBuilder$request$2.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:166)
+	at io.restassured.internal.RequestSpecificationImpl.sendHttpRequest(RequestSpecificationImpl.groovy:1451)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1268)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:819)
+	at groovy.lang.GroovyObject.invokeMethod(GroovyObject.java:39)
+	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:45)
+	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:55)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at io.restassured.internal.RequestSpecificationImpl.sendRequest(RequestSpecificationImpl.groovy:1200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1268)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:819)
+	at groovy.lang.GroovyObject.invokeMethod(GroovyObject.java:39)
+	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:45)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:166)
+	at io.restassured.internal.filter.SendRequestFilter.filter(SendRequestFilter.groovy:30)
+	at io.restassured.filter.Filter$filter$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at io.restassured.filter.Filter$filter.call(Unknown Source)
+	at io.restassured.internal.filter.FilterContextImpl.next(FilterContextImpl.groovy:72)
+	at io.restassured.filter.time.TimingFilter.filter(TimingFilter.java:56)
+	at io.restassured.filter.Filter$filter.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:157)
+	at io.restassured.internal.filter.FilterContextImpl.next(FilterContextImpl.groovy:72)
+	at io.restassured.filter.FilterContext$next.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:148)
+	at io.restassured.internal.RequestSpecificationImpl.applyPathParamsAndSendRequest(RequestSpecificationImpl.groovy:1655)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1268)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:819)
+	at groovy.lang.GroovyObject.invokeMethod(GroovyObject.java:39)
+	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:45)
+	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:55)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:203)
+	at io.restassured.internal.RequestSpecificationImpl.applyPathParamsAndSendRequest(RequestSpecificationImpl.groovy:1661)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1268)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:819)
+	at groovy.lang.GroovyObject.invokeMethod(GroovyObject.java:39)
+	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:45)
+	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:55)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:203)
+	at io.restassured.internal.RequestSpecificationImpl.get(RequestSpecificationImpl.groovy:171)
+	at io.restassured.internal.RequestSpecificationImpl.get(RequestSpecificationImpl.groovy)
+	at api.ApiRequests.GET(ApiRequests.java:12)
+	at steps.RestricaoStep.envioUmResquestDeUmCPFComDadosValidos(RestricaoStep.java:37)
+	at ✽.envio um resquest de um CPF "58063164083" com dados validos(file:///C:/Users/allan/full/automacoes/DesafioAPI/src/test/resources/Features/SicrediApi.feature:13)
+</pre>
+            <br>http://localhost:8080/api/v1/restricoes/58063164083
 </li>
 
-<li class="collection-item step passed">
-    <b>Então </b> retorna a simulação com os dados cadastrados (0S)
-            <br>CPF Cadastrado: 78230363251
+<li class="collection-item step skipped">
+    <b>Então </b> devo receber a mensagem informando situacao do CPF "58063164083" (0S)
 </li>
 
-<li class="collection-item step passed">
-    <b>E </b> o status code deve ser 201 (0S)
+<li class="collection-item step skipped">
+    <b>E </b> o status code deve ser 200 (0S)
 </li>
 
 <li class="collection-item hook"></li>        </ul></p>

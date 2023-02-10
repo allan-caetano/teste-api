@@ -3,6 +3,9 @@ package report;
 import com.rajatthareja.reportbuilder.ReportBuilder;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,4 +43,13 @@ public class HTMLReport {
         // Build your report
         reportBuilder.build(cucumberJsonReports);
     }
+
+
+//    public static void convert(String inputFile, String outputFile) throws IOException {
+//        FileInputStream inputStream = new FileInputStream(inputFile);
+//        FileOutputStream outputStream = new FileOutputStream(outputFile);
+//        HtmlConverter.convertToPdf(inputStream, outputStream);
+//        inputStream.close();
+//        outputStream.close();
+//    }
 }

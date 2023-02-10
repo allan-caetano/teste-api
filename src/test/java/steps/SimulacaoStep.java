@@ -106,7 +106,7 @@ public class SimulacaoStep extends ApiRequests {
     }
 
     @Quando("envio um resquest para alteracao de uma simulacao passando CPF {string} existente")
-    public void envioUmResquestParaAlteracaoDeUmaSimulacaoPassandoCPFExistente(String cpf) {
+    public void envioUmResquestParaAlteracaoDeUmaSimulacaoPassandoCPFExistente(String cpf) throws IOException {
         super.url = prop.getProp("url_simulacao") + cpf;
         super.headers = apiHeaders.headers();
         userEnvio = Users.builder()
@@ -117,7 +117,9 @@ public class SimulacaoStep extends ApiRequests {
                 .parcelas(3)
                 .seguro(true)
                 .build();
-        super.body = new JSONObject((new Gson().toJson(userEnvio)));
+        super.body = new JSONObject(new JsonUtils().parseJSONFile().get("nome"));
+        super.body = new JSONObject(new JsonUtils().parseJSONFile().get("email"));
+                //JSONObject((new Gson().toJson(userEnvio)));
         super.PUT();
     }
 
@@ -161,6 +163,7 @@ public class SimulacaoStep extends ApiRequests {
     public void envioUmResquestParaCriacaoDeUmaSimulacaoComCPF(String cpf) {
         super.url = prop.getProp("url_simulacao");
         super.headers = apiHeaders.headers();
+
         userEnvio = Users.builder()
                 .nome(faker.name().fullName())
                 .email(faker.internet().emailAddress())
