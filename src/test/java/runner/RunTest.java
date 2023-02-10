@@ -15,7 +15,7 @@ import java.io.IOException;
 @CucumberOptions(plugin = {"pretty","html:target/report.html", "json:target/report/cucumber.json"},
         features = {"src/test/resources/Features"},
         glue = {"steps"},
-        tags = "@criar-simulacao")
+        tags = "@cpf-com-restricao")
 
 public class RunTest {
 

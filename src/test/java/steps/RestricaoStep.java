@@ -19,9 +19,11 @@ public class RestricaoStep extends ApiRequests {
 
     @Dado("que possuo acesso a API de restricoes")
     public void quePossuoAcessoAAPIDeRestricoes() {
-       String uri = prop.getProp("url_resticoes");
-       logInfo(uri);
+      // String uri = prop.getProp("url_resticoes");
+       logInfo("Aqui chegou");
     }
+
+
 
     @Quando("envio um resquest de um CPF {string} com dados validos")
     public void envioUmResquestDeUmCPFComDadosValidos(String cpf) {
